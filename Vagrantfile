@@ -49,9 +49,16 @@ Vagrant.configure("2") do |config|
       v.cpus = "1"
     end
     node.vm.provision "shell", inline: <<-SHELL
-      echo "AGENT!!!!"
-      rpm -Uvh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
+      yum install -y git
+      git clone https://github.com/kickman2l/files.git
+      yum install -y http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
       yum install -y zabbix-agent
+
+      rm -f /etc/zabbix/zabbix_agentd.conf
+      cp -i /home/vagrant/files/zabbix_agentd.conf /etc/zabbix/
+
+      systemctl start zabbix-agent
+      systemctl enable zabbix-agent
     SHELL
   end
   config.vm.synced_folder ".", "/vagrant", type: "virtualbox"

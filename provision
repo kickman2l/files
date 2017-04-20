@@ -1,0 +1,39 @@
+# echo "Installing repository."
+      # yum install -y http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
+      # echo "Httpd server install"
+      # yum install -y httpd httpd-devel
+      # echo "Mariadb install"
+      # yum install -y mariadb-server mariadb
+      # echo "PHP and dependencies install"
+      # yum install -y php php-cli php-common php-devel php-pear php-gd php-mbstring php-mysql php-xml
+      # echo "Install zabbix"
+      # yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-java-gateway
+
+      # #cp /vagrant/zb.conf /etc/httpd/conf.d/
+
+
+      # echo "Starting services!"
+      # systemctl start mariadb
+      # systemctl enable mariadb
+
+
+      # mysql -u root -Bse "create database zabbix character set utf8 collate utf8_bin;"
+      # mysql -u root -Bse "grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';"
+      # zcat /usr/share/doc/zabbix-server-mysql-*/create.sql.gz | mysql -u root zabbix
+
+      # #cp -i /vagrant/zabbix_server.conf /etc/zabbix/
+      # #cp -i /vagrant/zabbix.conf /etc/httpd/conf.d/
+      # #cp -i /vagrant/zabbix.conf.php /etc/zabbix/web/
+
+      # systemctl start zabbix-server
+      # systemctl enable zabbix-server
+      # systemctl start zabbix-agent
+      # systemctl enable zabbix-agent
+      # systemctl start httpd
+      # systemctl enable httpd
+      # systemctl start mariadb
+      # systemctl enable mariadb
+
+
+yum install -y http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
+yum install -y mariadb maroadb-server

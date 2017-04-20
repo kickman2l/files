@@ -9,34 +9,35 @@ Vagrant.configure("2") do |config|
     end
     srv.vm.provision "shell", inline: <<-SHELL
       echo "SERVER PROVISION"
-      # echo "Installing repository."
-      # yum install -y http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
-      # echo "Httpd server install"
-      # yum install -y httpd httpd-devel
-      # echo "Mariadb install"
-      # yum install -y mariadb-server mariadb
-      # echo "PHP and dependencies install"
-      # yum install -y php php-cli php-common php-devel php-pear php-gd php-mbstring php-mysql php-xml
-      # echo "Install zabbix"
-      # yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-java-gateway
-      # #cp /vagrant/zb.conf /etc/httpd/conf.d/
-      # echo "Starting services!"
-      # systemctl start mariadb
-      # systemctl enable mariadb
-      # mysql -u root -Bse "create database zabbix character set utf8 collate utf8_bin;"
-      # mysql -u root -Bse "grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';"
-      # zcat /usr/share/doc/zabbix-server-mysql-*/create.sql.gz | mysql -u root zabbix
-      # #cp -i /vagrant/zabbix_server.conf /etc/zabbix/
-      # #cp -i /vagrant/zabbix.conf /etc/httpd/conf.d/
-      # #cp -i /vagrant/zabbix.conf.php /etc/zabbix/web/ 
-      # systemctl start zabbix-server
-      # systemctl enable zabbix-server
-      # systemctl start zabbix
-      # systemctl enable zabbix
-      # systemctl start httpd
-      # systemctl enable httpd
-      # systemctl start mariadb
-      # systemctl enable mariadb
+      yum install -y git
+      git clone https://github.com/kickman2l/files.git
+      yum install -y http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
+      yum install -y httpd httpd-devel
+      yum install -y mariadb-server mariadb
+      yum install -y php php-cli php-common php-devel php-pear php-gd php-mbstring php-mysql php-xml
+      yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-java-gateway
+      cp -i /home/vagrant/files/zb.conf /etc/httpd/conf.d/
+      systemctl start mariadb
+      mysql -u root -Bse "create database zabbix character set utf8 collate utf8_bin;"
+      mysql -u root -Bse "grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';"
+      zcat /usr/share/doc/zabbix-server-mysql-*/create.sql.gz | mysql -u root zabbix
+
+      rm -f /etc/zabbix/zabbix_server.conf
+      cp -i /home/vagrant/files/zabbix_server.conf /etc/zabbix/
+
+      rm -f /etc/httpd/conf.d/zabbix.conf
+      cp -i /home/vagrant/files/zabbix.conf /etc/httpd/conf.d/
+
+      cp -i /home/vagrant/files/zabbix.conf.php /etc/zabbix/web/
+
+      systemctl start zabbix-server
+      systemctl enable zabbix-server
+      systemctl start zabbix-agent
+      systemctl enable zabbix-agent
+      systemctl start httpd
+      systemctl enable httpd
+      systemctl start mariadb
+      systemctl enable mariadb
     SHELL
   end
   config.vm.define "agent" do |node|

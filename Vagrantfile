@@ -23,12 +23,12 @@ Vagrant.configure("2") do |config|
       zcat /usr/share/doc/zabbix-server-mysql-*/create.sql.gz | mysql -u root zabbix
 
       rm -f /etc/zabbix/zabbix_server.conf
-      cp -i /home/vagrant/files/zabbix_server.conf /etc/zabbix/
+      cp /home/vagrant/files/zabbix_server.conf /etc/zabbix/
 
       rm -f /etc/httpd/conf.d/zabbix.conf
-      cp -i /home/vagrant/files/zabbix.conf /etc/httpd/conf.d/
+      cp /home/vagrant/files/zabbix.conf /etc/httpd/conf.d/
 
-      cp -i /home/vagrant/files/zabbix.conf.php /etc/zabbix/web/
+      cp /home/vagrant/files/zabbix.conf.php /etc/zabbix/web/
 
       systemctl start zabbix-server
       systemctl enable zabbix-server
@@ -55,7 +55,7 @@ Vagrant.configure("2") do |config|
       yum install -y zabbix-agent
 
       rm -f /etc/zabbix/zabbix_agentd.conf
-      cp -i /home/vagrant/files/zabbix_agentd.conf /etc/zabbix/
+      cp /home/vagrant/files/zabbix_agentd.conf /etc/zabbix/
 
       systemctl start zabbix-agent
       systemctl enable zabbix-agent

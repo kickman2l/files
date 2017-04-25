@@ -27,19 +27,20 @@ auth_token = post({
 
 def get_group():
     post({
-        "jsonrpc": "2.0",
-        "method": "hostgroup.get",
-        "params": {
-            "filter": {
-                "name": [
-                    "SUPERSTAR YEAH!",
-                    "CloudHosts"
-                ]
-            }
-        },
-        "auth": auth_token,
-        "id": 1
-    })
+    "jsonrpc": "2.0",
+    "method": "hostgroup.get",
+    "params": {
+        "output": "extend",
+        "filter": {
+            "name": [
+                "Zabbix servers",
+                "Linux servers"
+            ]
+        }
+    },
+    "auth": auth_token,
+    "id": 1
+})
 
 def create_group(groupe_name):
     post({

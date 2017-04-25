@@ -33,8 +33,7 @@ def is_groupe_exists():
             "output": "extend",
             "filter": {
                 "name": [
-                    "Zabbix servers",
-                    "Linux servers"
+                    "CloudHosts",
                 ]
             }
         },

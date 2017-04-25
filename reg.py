@@ -27,14 +27,14 @@ auth_token = post({
 
 def is_groupe_exists():
     results = post({
-    "jsonrpc": "2.0",
-    "method": "hostgroup.exists",
-    "params": {
-        "name": "CloudHosts"
-    },
-    "auth": auth_token,
-    "id": 1
-    }).json()["result"]
+        "jsonrpc": "2.0",
+        "method": "hostgroup.exists",
+        "params": {
+            "name": "CloudHosts"
+        },
+        "auth": auth_token,
+        "id": 1
+    }).json()
     return results
 
 def create_group(groupe_name):

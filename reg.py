@@ -23,30 +23,6 @@ auth_token = post({
     },
     "auth": None,
     "id": 0}
-).json()["result"]
+).json()
 
-def register_host(hostname, ip):
-    post({
-        "jsonrpc": "2.0",
-        "method": "host.create",
-        "params": {
-            "host": hostname,
-            "templates": [{
-                "templateid": "10001"
-            }],
-            "interfaces": [{
-                "type": 1,
-                "main": 1,
-                "useip": 1,
-                "ip": ip,
-                "dns": "",
-                "port": "10050"
-            }],
-            "groups": [
-                {"groupid": "1"},
-                {"groupid": "2"}
-            ]
-        },
-        "auth": auth_token,
-        "id": 1
-    })
+print auth_token

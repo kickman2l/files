@@ -31,7 +31,7 @@ def is_groupe_exists():
     "jsonrpc": "2.0",
     "method": "hostgroup.get",
     "params": {
-        "output": "extend",
+        "output": "query",
         "filter": {
             "name": [
                 "Zabbix servers",

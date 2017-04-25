@@ -33,7 +33,7 @@ def is_groupe_exists():
             "output": "extend",
             "filter": {
                 "name": [
-                    "CloudHosts",
+                    "CloudHosts111",
                 ]
             }
         },

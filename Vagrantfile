@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   config.vm.define "server" do |srv|
-    srv.vm.box = "zabbix"
+    srv.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
     srv.vm.hostname = "zabbix.loc"
     srv.vm.network "private_network", ip: "192.168.33.100"
     srv.vm.provider "virtualbox" do |v|
@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
     SHELL
   end
   config.vm.define "agent" do |node|
-    node.vm.box = "zabbix"
+    node.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
     node.vm.hostname = "agent.loc"
     node.vm.network "private_network", ip: "192.168.33.110"
     node.vm.provider "virtualbox" do |v|
@@ -56,7 +56,10 @@ Vagrant.configure("2") do |config|
 
       rm -f /etc/zabbix/zabbix_agentd.conf
       cp /home/vagrant/files/zabbix_agentd.conf /etc/zabbix/
-
+      yum install -y tomcat
+      yum install -y tomcat-webapps tomcat-admin-webapps
+      systemctl start tomcat
+      systemctl enable tomcat
       systemctl start zabbix-agent
       systemctl enable zabbix-agent
     SHELL

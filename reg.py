@@ -26,6 +26,7 @@ auth_token = post({
 ).json()["result"]
 
 def is_groupe_exists():
+    print("test test")
     post({
     "jsonrpc": "2.0",
     "method": "hostgroup.get",

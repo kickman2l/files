@@ -34,7 +34,7 @@ def is_groupe_exists():
         },
         "auth": auth_token,
         "id": 1
-    })
+    }).json()
     return results
 
 def create_group(groupe_name):

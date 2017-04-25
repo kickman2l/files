@@ -16,7 +16,7 @@ def post(request):
 
 auth_token = post({
     "jsonrpc": "2.0",
-    "method": "user.authenticate",
+    "method": "user.login",
     "params": {
         "user": zabbix_api_admin_name,
         "password": zabbix_api_admin_password

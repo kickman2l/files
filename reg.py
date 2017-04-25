@@ -25,18 +25,12 @@ auth_token = post({
     "id": 0}
 ).json()["result"]
 
-def get_group():
+def is_groupe_exists():
     post({
     "jsonrpc": "2.0",
-    "method": "hostgroup.get",
+    "method": "hostgroup.exists",
     "params": {
-        "output": "extend",
-        "filter": {
-            "name": [
-                "Zabbix servers",
-                "Linux servers"
-            ]
-        }
+        "name": "SUPERSTAR YEAH!"
     },
     "auth": auth_token,
     "id": 1
@@ -79,7 +73,7 @@ def register_host(hostname, ip):
         "id": 1
     })
 
-data = get_group()
+data = is_groupe_exists()
 #create_group("SUPERSTAR YEAH!")
 print data
 # register_host('agent.loc','192.168.33.110')

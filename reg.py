@@ -28,15 +28,9 @@ auth_token = post({
 def is_groupe_exists():
     results = post({
         "jsonrpc": "2.0",
-        "method": "hostgroup.get",
+        "method": "hostgroup.exists",
         "params": {
-            "output": "extend",
-            "filter": {
-                "name": [
-                    "Zabbix servers",
-                    "Linux servers"
-                ]
-            }
+            "name": "SUPERSTAR YEAH!"
         },
         "auth": auth_token,
         "id": 1

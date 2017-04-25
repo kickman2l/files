@@ -42,6 +42,24 @@ def is_groupe_exists():
     }).json()["result"]
     return results
 
+def get_template_id(template_name):
+    results = post({
+    "jsonrpc": "2.0",
+    "method": "template.get",
+    "params": {
+        "output": "extend",
+        "filter": {
+            "host": [
+                template_name,
+            ]
+        }
+    },
+    "auth": auth_token,
+    "id": 1
+     }).json()["result"]
+    return results
+
+    
 def create_group(groupe_name):
     post({
         "jsonrpc": "2.0",
@@ -79,7 +97,7 @@ def register_host(hostname, ip):
         "id": 1
     })
 
-data = is_groupe_exists()
+data = get_template_id("Template OS Linux")
 #create_group("SUPERSTAR YEAH!")
 print data
 # register_host('agent.loc','192.168.33.110')

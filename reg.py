@@ -28,11 +28,17 @@ auth_token = post({
 def is_groupe_exists():
     results = post({
         "jsonrpc": "2.0",
-        "method": "hostgroup.exists",
+        "method": "hostgroup.get",
         "params": {
-            "name": "CloudHosts"
+            "output": "extend",
+            "filter": {
+                "name": [
+                    "Zabbix servers",
+                    "Linux servers"
+                ]
+            }
         },
-        "auth": auth_token,
+        "auth": "6f38cddc44cfbb6c1bd186f9a220b5a0",
         "id": 1
     }).json()
     return results

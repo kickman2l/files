@@ -33,7 +33,7 @@ def get_group(groupName):
             "output": "extend",
             "filter": {
                 "name": [
-                    groupName
+                    "CloudHosts",
                 ]
             }
         },

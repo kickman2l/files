@@ -38,7 +38,7 @@ def is_groupe_exists():
                 ]
             }
         },
-        "auth": "6f38cddc44cfbb6c1bd186f9a220b5a0",
+        "auth": auth_token,
         "id": 1
     }).json()
     return results

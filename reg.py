@@ -23,6 +23,6 @@ auth_token = post({
     },
     "auth": None,
     "id": 0}
-).json()
+).json()["result"]
 
 print auth_token

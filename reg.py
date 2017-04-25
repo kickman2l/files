@@ -30,7 +30,7 @@ def is_groupe_exists():
         "jsonrpc": "2.0",
         "method": "hostgroup.get",
         "params": {
-            "name": ["SUPERSTAR YEAH!"]
+            "name": "CloudHosts"
         },
         "auth": auth_token,
         "id": 1

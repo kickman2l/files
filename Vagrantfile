@@ -58,10 +58,14 @@ Vagrant.configure("2") do |config|
       cp /home/vagrant/files/zabbix_agentd.conf /etc/zabbix/
       yum install -y tomcat
       yum install -y tomcat-webapps tomcat-admin-webapps
+      yum -y install python-pip
+      pip install requests
+      pip install --upgrade pip
       systemctl start tomcat
       systemctl enable tomcat
       systemctl start zabbix-agent
       systemctl enable zabbix-agent
+      python /home/vagrant/files/reg.py
     SHELL
   end
   config.vm.synced_folder ".", "/vagrant", type: "virtualbox"

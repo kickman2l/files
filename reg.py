@@ -25,6 +25,22 @@ auth_token = post({
     "id": 0}
 ).json()["result"]
 
+def get_group(groupName):
+    post({
+        "jsonrpc": "2.0",
+        "method": "hostgroup.get",
+        "params": {
+            "output": "extend",
+            "filter": {
+                "name": [
+                    groupName
+                ]
+            }
+        },
+        "auth": auth_token,
+        "id": 1
+    })
+
 def register_host(hostname, ip):
     post({
         "jsonrpc": "2.0",
@@ -51,4 +67,6 @@ def register_host(hostname, ip):
         "id": 1
     })
 
-register_host('agent.loc','192.168.33.110')
+data = get_group("CloudHosts")
+print data
+# register_host('agent.loc','192.168.33.110')

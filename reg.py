@@ -25,7 +25,7 @@ auth_token = post({
     "id": 0}
 ).json()["result"]
 
-def get_group(groupName):
+def get_group(groupe_name):
     post({
         "jsonrpc": "2.0",
         "method": "hostgroup.get",
@@ -33,9 +33,20 @@ def get_group(groupName):
             "output": "extend",
             "filter": {
                 "name": [
-                    "CloudHosts",
+                    groupe_name
                 ]
             }
+        },
+        "auth": auth_token,
+        "id": 1
+    })
+
+def create_group(groupe_name):
+    post({
+        "jsonrpc": "2.0",
+        "method": "hostgroup.create",
+        "params": {
+            "name": groupe_name
         },
         "auth": auth_token,
         "id": 1
@@ -67,6 +78,7 @@ def register_host(hostname, ip):
         "id": 1
     })
 
-data = get_group("CloudHosts")
-print data
+# data = get_group('CloudHosts')
+create_group("SUPERSTAR YEAH!")
+# print data
 # register_host('agent.loc','192.168.33.110')

@@ -30,6 +30,9 @@ Vagrant.configure("2") do |config|
 
       cp /home/vagrant/files/zabbix.conf.php /etc/zabbix/web/
 
+      yum install zabbix-java-gateway
+      systemctl start zabbix-java-gateway
+      systemctl enable zabbix-java-gateway
       systemctl start zabbix-server
       systemctl enable zabbix-server
       systemctl start zabbix-agent
@@ -53,7 +56,6 @@ Vagrant.configure("2") do |config|
       git clone https://github.com/kickman2l/files.git
       yum install -y http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
       yum install -y zabbix-agent
-
       rm -f /etc/zabbix/zabbix_agentd.conf
       cp /home/vagrant/files/zabbix_agentd.conf /etc/zabbix/
       yum install -y tomcat
@@ -64,6 +66,7 @@ Vagrant.configure("2") do |config|
       /bin/cp /home/vagrant/files/catalina-jmx-remote.jar /usr/share/tomcat/lib/
       /bin/cp /home/vagrant/files/server.xml /usr/share/tomcat/conf/
       /bin/cp /home/vagrant/files/tomcat.conf /usr/share/tomcat/conf/
+      /bin/cp /home/vagrant/files/hello-world.war /usr/share/tomcat/webapps
       systemctl start tomcat
       systemctl enable tomcat
       systemctl start zabbix-agent

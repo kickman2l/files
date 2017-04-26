@@ -60,6 +60,8 @@ Vagrant.configure("2") do |config|
       yum install -y tomcat-webapps tomcat-admin-webapps
       yum -y install python-pip
       pip install requests
+      /bin/cp /home/vagrant/files/catalina-jmx-remote.jar /usr/share/tomcat/lib/
+      /bin/cp /home/vagrant/files/server.xml /usr/share/tomcat/conf/
       pip install --upgrade pips
       systemctl start tomcat
       systemctl enable tomcat

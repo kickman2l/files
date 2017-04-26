@@ -60,7 +60,7 @@ Vagrant.configure("2") do |config|
       yum install -y tomcat-webapps tomcat-admin-webapps
       yum -y install python-pip
       pip install requests
-      pip install --upgrade pip
+      pip install --upgrade pips
       systemctl start tomcat
       systemctl enable tomcat
       systemctl start zabbix-agent

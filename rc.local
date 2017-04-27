@@ -11,4 +11,4 @@
 # that this script will be executed during boot.
 
 touch /var/lock/subsys/local
-#python /home/vagrant/files/reg.py
+python /home/vagrant/files/reg.py

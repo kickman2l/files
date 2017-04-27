@@ -141,10 +141,10 @@ def check_hostname(hostname):
     return results
 
 # PROCESS
-g_name = "CloudHostasdasdasds111222"
+g_name = "TEST SOMETHING"
 groupe = is_groupe_exists(g_name)
-hostname = "agent.loc"
-ip = "192.168.33.110"
+hostname = os.popen('hostname').readline()
+ip = os.popen("hostname -I | awk '{print $2}'").readline()
 
 
 if len(groupe) == 0:

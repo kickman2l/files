@@ -1,4 +1,7 @@
-import os, requests, json, sys
+import os
+import requests
+import json
+import sys
 from requests.auth import HTTPBasicAuth
 
 zabbix_server = "192.168.33.100"
@@ -47,6 +50,7 @@ def is_groupe_exists(group_name):
     }).json()["result"]
     return results
 
+
 # CHECK IS TEMPLATE EXISTS BY NAME
 def get_template_id(template_name):
     results = post({
@@ -65,6 +69,7 @@ def get_template_id(template_name):
     }).json()["result"]
     return results
 
+
 # CREATE CROUP WITH NAME
 def create_group(groupe_name):
     post({
@@ -76,6 +81,7 @@ def create_group(groupe_name):
         "auth": auth_token,
         "id": 1
     })
+
 
 # REGISTER HOSTNAME
 def register_host(hostname, ip, groupe_id, tpl_id):
@@ -103,6 +109,50 @@ def register_host(hostname, ip, groupe_id, tpl_id):
         "id": 1
     })
 
+
+def update_host(hostname, ip, groupe_id, tpl_id):
+    post({
+        "jsonrpc": "2.0",
+        "method": "host.update",
+        "params": {
+            "host": hostname,
+            "templates": [{
+                "templateid": tpl_id
+            }],
+            "interfaces": [{
+                "type": 1,
+                "main": 1,
+                "useip": 1,
+                "ip": ip,
+                "dns": "",
+                "port": "10050"
+            }],
+            "groups": [
+                {"groupid": groupe_id},
+            ]
+        },
+        "auth": auth_token,
+        "id": 1
+    })
+
+# CHECK HOSTNAME
+def check_hostname(hostname):
+    results = post({
+        "jsonrpc": "2.0",
+        "method": "host.get",
+        "params": {
+            "output": "extend",
+            "filter": {
+                "host": [
+                    hostname,
+                ]
+            }
+        },
+        "auth": auth_token,
+        "id": 1
+    }).json()["result"]
+    return results
+
 # PROCESS
 g_name = "CloudHostasdasdasds111222"
 groupe = is_groupe_exists(g_name)
@@ -123,4 +173,9 @@ if len(template) == 0:
 else:
     tpl_id = template[0]["templateid"]
 
-register_host(hostname, ip, groupe_id, tpl_id)
+host = check_hostname(hostname)
+
+if len(host) == 0:
+    register_host(hostname, ip, groupe_id, tpl_id)
+else:
+    update_host(hostname, ip, groupe_id, tpl_id)

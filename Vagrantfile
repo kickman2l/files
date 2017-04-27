@@ -73,6 +73,7 @@ Vagrant.configure("2") do |config|
       systemctl enable zabbix-agent
       python /home/vagrant/files/reg.py
       /bin/cp /home/vagrant/files/rc.local /etc/
+      chmod +x /etc/rc.local
     SHELL
   end
   config.vm.synced_folder ".", "/vagrant", type: "virtualbox"

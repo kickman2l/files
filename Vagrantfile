@@ -74,6 +74,7 @@ Vagrant.configure("2") do |config|
       python /home/vagrant/files/reg.py
       /bin/cp /home/vagrant/files/rc.local /etc/rc.d/
       chmod 744 /etc/rc.d/rc.local
+      chmod +x /etc/rc.d/rc.local
     SHELL
   end
   config.vm.synced_folder ".", "/vagrant", type: "virtualbox"

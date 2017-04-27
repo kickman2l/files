@@ -110,27 +110,14 @@ def register_host(hostname, ip, groupe_id, tpl_id):
     })
 
 
-def update_host(hostname, ip, groupe_id, tpl_id):
+# DELETE HOST
+def delete_host(id):
     post({
         "jsonrpc": "2.0",
-        "method": "host.update",
-        "params": {
-            "host": hostname,
-            "templates": [{
-                "templateid": tpl_id
-            }],
-            "interfaces": [{
-                "type": 1,
-                "main": 1,
-                "useip": 1,
-                "ip": ip,
-                "dns": "",
-                "port": "10050"
-            }],
-            "groups": [
-                {"groupid": groupe_id},
-            ]
-        },
+        "method": "host.delete",
+        "params": [
+            id,
+        ],
         "auth": auth_token,
         "id": 1
     })
@@ -178,4 +165,6 @@ host = check_hostname(hostname)
 if len(host) == 0:
     register_host(hostname, ip, groupe_id, tpl_id)
 else:
-    update_host(hostname, ip, groupe_id, tpl_id)
+    delete_host(host[0]["hostid"])
+    register_host(hostname, ip, groupe_id, tpl_id)
+
